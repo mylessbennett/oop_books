@@ -21,8 +21,15 @@ class Book:
         random_book = choice(cls.on_shelf)
         return random_book
 
+    def lent_out(self):
+        return self in Book.on_shelf
+
 sapiens = Book.create('Sapiens', 'Yuval Noah Harari', "9780099590088")
 py_for_dummies = Book.create('Python for Dummies', 'Stef Maruch', '9781118084847')
 great_expectations = Book.create('Great Expectations', 'Charles Dickens', '9781517717704')
-#-------------------------------------------------------------------------------------------- 
+#--------------------------------------------------------------------------------------------
 print(Book.browse().title)
+
+print(len(Book.on_shelf))
+print(len(Book.on_loan))
+print(sapiens.lent_out())
