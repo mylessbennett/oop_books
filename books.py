@@ -51,6 +51,18 @@ class Book:
             returned = True
         return returned
 
+    @classmethod
+    def overdue(cls):
+        now = datetime.now()
+        overdue_books = []
+        for book in Book.on_loan:
+            if book.current_due_date() < now:
+                overdue_books.append(book)
+        return overdue_books
+
+
+
+
 
 
 sapiens = Book.create('Sapiens', 'Yuval Noah Harari', "9780099590088")
@@ -59,12 +71,10 @@ great_expectations = Book.create('Great Expectations', 'Charles Dickens', '97815
 #--------------------------------------------------------------------------------------------
 print(Book.browse().title)
 #--------------------------------------------------------------------------------------------
-# print(len(Book.on_shelf))
-# print(len(Book.on_loan))
-# print(sapiens.lent_out())
 print(sapiens.borrow())
-print(Book.on_shelf)
-print(Book.on_loan)
+print(len(Book.on_loan))
+print(len(Book.on_shelf))
 print(sapiens.return_to_library())
-print(Book.on_loan)
-print(Book.on_shelf)
+print(len(Book.on_loan))
+print(len(Book.on_shelf))
+print(Book.overdue())
